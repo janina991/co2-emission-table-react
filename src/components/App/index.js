@@ -1,14 +1,12 @@
 import React from 'react';
+import Header from '../Header';
 
 const App = () => {
   return (
     <div>
       <h1>CO2 Emission Table</h1>
-      <img
-        src={'../images/co2.jpg'}
-        className="responsive"
-        alt={'co2 footprint'}
-      />
+      <Header />
+      Text
     </div>
   );
 };

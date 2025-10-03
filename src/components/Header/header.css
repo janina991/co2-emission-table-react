@@ -1,0 +1,33 @@
+.header {
+  height: 56px;
+  margin-bottom: 120px;
+  background-color: white;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.inner {
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.link {
+  display: block;
+  line-height: 1;
+  padding: 8px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #495057;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.link:hover {
+  background-color: #f8f9fa;
+}
+
+.link[data-active] {
+  background-color: #228be6;
+  color: white;
+}

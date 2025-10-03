@@ -26,7 +26,15 @@ export default () => {
         domain: path.resolve(path.dirname(''), 'node_modules/domain-browser'),
         buffer: path.resolve(path.dirname(''), 'node_modules/buffer'),
       },
-      alias: {},
+      alias: {
+        'process/browser': 'process/browser.js',
+      },
+      extensionAlias: {
+        '.js': ['.js', '.ts', '.tsx'],
+        '.mjs': ['.mjs', '.js'],
+      },
+      extensions: ['.js', '.jsx', '.ts', '.tsx', '.mjs'],
+      fullySpecified: false,
     },
     entry: ['babel-polyfill', 'whatwg-fetch', './src/index.js'],
     output: {
@@ -54,9 +62,15 @@ export default () => {
             test: /[\\/]node_modules[\\/]/,
             name(module) {
               // get the name. E.g. node_modules/packageName/not/this/part.js or node_modules/packageName
-              const packageName = module.context.match(
+              const match = module.context.match(
                 /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
-              )[1];
+              );
+              
+              if (!match) {
+                return 'vendor';
+              }
+              
+              const packageName = match[1];
 
               // npm package names are URL-safe, but some servers don't like @ symbols
               return `npm.${packageName.replace('@', '')}`;
@@ -98,6 +112,9 @@ export default () => {
           test: /\.mjs$/,
           include: /node_modules/,
           type: 'javascript/auto',
+          resolve: {
+            fullySpecified: false,
+          },
         },
       ],
     },
