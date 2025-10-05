@@ -17,7 +17,8 @@ import {
   TextInput,
   UnstyledButton,
 } from '@mantine/core';
-import { co2EmissionsData, CO2EmissionData } from '../../data/co2EmissionsData';
+import { getDataByYear, CO2EmissionData } from '../../data/co2EmissionsData';
+import { YearNavbar } from './YearNavbar';
 import './table.css';
 
 type RowData = CO2EmissionData;
@@ -119,27 +120,42 @@ function formatNumber(num: number): string {
 export function TableData() {
   const [companySearch, setCompanySearch] = useState('');
   const [countryFilter, setCountryFilter] = useState<string | null>(null);
-  const [sortedData, setSortedData] = useState(co2EmissionsData);
+  const [selectedYear, setSelectedYear] = useState<string>('2025'); // Default to 2025
   const [sortBy, setSortBy] = useState<keyof RowData | null>(null);
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
-  // Get unique countries for the select dropdown
+  // Get data for the selected year
+  const currentYearData = getDataByYear(parseInt(selectedYear));
+
+  // Get unique countries for the select dropdown from current year data
   const countries = Array.from(
-    new Set(co2EmissionsData.map((item) => item.country)),
+    new Set(currentYearData.map((item) => item.country)),
   ).sort();
+
+  // Filtered and sorted data
+  const [sortedData, setSortedData] = useState(currentYearData);
+
+  // Update sorted data when year changes
+  React.useEffect(() => {
+    const yearData = getDataByYear(parseInt(selectedYear));
+    setSortedData(
+      sortData(yearData, {
+        sortBy,
+        reversed: reverseSortDirection,
+        companySearch,
+        countryFilter,
+      }),
+    );
+  }, [selectedYear, sortBy, reverseSortDirection, companySearch, countryFilter]);
+
+  const handleYearSelect = (year: string) => {
+    setSelectedYear(year);
+  };
 
   const setSorting = (field: keyof RowData) => {
     const reversed = field === sortBy ? !reverseSortDirection : false;
     setReverseSortDirection(reversed);
     setSortBy(field);
-    setSortedData(
-      sortData(co2EmissionsData, {
-        sortBy: field,
-        reversed,
-        companySearch,
-        countryFilter,
-      }),
-    );
   };
 
   const handleCompanySearchChange = (
@@ -147,26 +163,10 @@ export function TableData() {
   ) => {
     const { value } = event.currentTarget;
     setCompanySearch(value);
-    setSortedData(
-      sortData(co2EmissionsData, {
-        sortBy,
-        reversed: reverseSortDirection,
-        companySearch: value,
-        countryFilter,
-      }),
-    );
   };
 
   const handleCountryFilterChange = (value: string | null) => {
     setCountryFilter(value);
-    setSortedData(
-      sortData(co2EmissionsData, {
-        sortBy,
-        reversed: reverseSortDirection,
-        companySearch,
-        countryFilter: value,
-      }),
-    );
   };
 
   const rows = sortedData.map((row) => (
@@ -192,7 +192,10 @@ export function TableData() {
   return (
     <Container my="md" size="xl">
       <Grid>
-        <Grid.Col span={{ base: 12, xs: 12 }}>
+        <Grid.Col span={{ base: 12, md: 3 }}>
+          <YearNavbar activeYear={selectedYear} onYearSelect={handleYearSelect} />
+        </Grid.Col>
+        <Grid.Col span={{ base: 12, md: 9 }}>
           <Grid mb="md" gutter="md">
             <Grid.Col span={{ base: 12, sm: 6, md: 8 }}>
               <TextInput

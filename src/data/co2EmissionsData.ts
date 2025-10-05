@@ -6,9 +6,11 @@ export interface CO2EmissionData {
   scope2: number;
   scope3: number;
   contact: string;
+  year: number;
 }
 
-export const co2EmissionsData: CO2EmissionData[] = [
+// Data for 2024
+export const co2EmissionsData2024: CO2EmissionData[] = [
   {
     company: 'Beispiel AG',
     country: 'Deutschland',
@@ -17,6 +19,7 @@ export const co2EmissionsData: CO2EmissionData[] = [
     scope2: 1200000,
     scope3: 1900000,
     contact: 'co2@beispielag.de',
+    year: 2024,
   },
   {
     company: 'Global Energy Corp',
@@ -26,6 +29,7 @@ export const co2EmissionsData: CO2EmissionData[] = [
     scope2: 2200000,
     scope3: 2500000,
     contact: 'emissions@globalenergy.com',
+    year: 2024,
   },
   {
     company: 'TechNova GmbH',
@@ -35,6 +39,7 @@ export const co2EmissionsData: CO2EmissionData[] = [
     scope2: 320000,
     scope3: 430000,
     contact: 'umwelt@technova.de',
+    year: 2024,
   },
   {
     company: 'Industria SA',
@@ -44,6 +49,7 @@ export const co2EmissionsData: CO2EmissionData[] = [
     scope2: 900000,
     scope3: 1000000,
     contact: 'co2@industria.es',
+    year: 2024,
   },
   {
     company: 'Green Manufacturing Ltd',
@@ -53,6 +59,7 @@ export const co2EmissionsData: CO2EmissionData[] = [
     scope2: 750000,
     scope3: 950000,
     contact: 'sustainability@greenmanuf.co.uk',
+    year: 2024,
   },
   {
     company: 'EcoSolutions AB',
@@ -62,6 +69,7 @@ export const co2EmissionsData: CO2EmissionData[] = [
     scope2: 180000,
     scope3: 280000,
     contact: 'klimat@ecosolutions.se',
+    year: 2024,
   },
   {
     company: 'Automotive Excellence SpA',
@@ -71,6 +79,7 @@ export const co2EmissionsData: CO2EmissionData[] = [
     scope2: 1100000,
     scope3: 1400000,
     contact: 'emissioni@autoexcellence.it',
+    year: 2024,
   },
   {
     company: 'Renewable Power Inc',
@@ -80,6 +89,7 @@ export const co2EmissionsData: CO2EmissionData[] = [
     scope2: 280000,
     scope3: 350000,
     contact: 'climate@renewpower.com',
+    year: 2024,
   },
   {
     company: 'Transport Logistics GmbH',
@@ -89,6 +99,7 @@ export const co2EmissionsData: CO2EmissionData[] = [
     scope2: 1400000,
     scope3: 2000000,
     contact: 'nachhaltigkeit@transport-log.de',
+    year: 2024,
   },
   {
     company: 'ChemIndustrie SA',
@@ -98,6 +109,7 @@ export const co2EmissionsData: CO2EmissionData[] = [
     scope2: 1900000,
     scope3: 2400000,
     contact: 'environnement@chemindustrie.fr',
+    year: 2024,
   },
   {
     company: 'Pacific Steel Co',
@@ -107,6 +119,7 @@ export const co2EmissionsData: CO2EmissionData[] = [
     scope2: 2400000,
     scope3: 2500000,
     contact: 'kankyou@pacificsteel.jp',
+    year: 2024,
   },
   {
     company: 'Nordic Mining AS',
@@ -116,6 +129,7 @@ export const co2EmissionsData: CO2EmissionData[] = [
     scope2: 950000,
     scope3: 1150000,
     contact: 'miljo@nordicmining.no',
+    year: 2024,
   },
   {
     company: 'AgriFood Systems',
@@ -125,6 +139,7 @@ export const co2EmissionsData: CO2EmissionData[] = [
     scope2: 520000,
     scope3: 730000,
     contact: 'duurzaamheid@agrifood.nl',
+    year: 2024,
   },
   {
     company: 'Construction Partners AG',
@@ -134,6 +149,7 @@ export const co2EmissionsData: CO2EmissionData[] = [
     scope2: 480000,
     scope3: 650000,
     contact: 'umwelt@construction-partners.ch',
+    year: 2024,
   },
   {
     company: 'Electronics Manufacturing Ltd',
@@ -143,5 +159,171 @@ export const co2EmissionsData: CO2EmissionData[] = [
     scope2: 900000,
     scope3: 1000000,
     contact: 'environment@elecmanuf.kr',
+    year: 2024,
   },
 ];
+
+// Data for 2025 (with reduced emissions showing improvement)
+export const co2EmissionsData2025: CO2EmissionData[] = [
+  {
+    company: 'Beispiel AG',
+    country: 'Deutschland',
+    totalEmissions: 4850000,
+    scope1: 1950000,
+    scope2: 1050000,
+    scope3: 1850000,
+    contact: 'co2@beispielag.de',
+    year: 2025,
+  },
+  {
+    company: 'Global Energy Corp',
+    country: 'USA',
+    totalEmissions: 7900000,
+    scope1: 3500000,
+    scope2: 2000000,
+    scope3: 2400000,
+    contact: 'emissions@globalenergy.com',
+    year: 2025,
+  },
+  {
+    company: 'TechNova GmbH',
+    country: 'Deutschland',
+    totalEmissions: 1050000,
+    scope1: 380000,
+    scope2: 280000,
+    scope3: 390000,
+    contact: 'umwelt@technova.de',
+    year: 2025,
+  },
+  {
+    company: 'Industria SA',
+    country: 'Spanien',
+    totalEmissions: 3150000,
+    scope1: 1380000,
+    scope2: 820000,
+    scope3: 950000,
+    contact: 'co2@industria.es',
+    year: 2025,
+  },
+  {
+    company: 'Green Manufacturing Ltd',
+    country: 'Großbritannien',
+    totalEmissions: 2550000,
+    scope1: 980000,
+    scope2: 680000,
+    scope3: 890000,
+    contact: 'sustainability@greenmanuf.co.uk',
+    year: 2025,
+  },
+  {
+    company: 'EcoSolutions AB',
+    country: 'Schweden',
+    totalEmissions: 590000,
+    scope1: 180000,
+    scope2: 150000,
+    scope3: 260000,
+    contact: 'klimat@ecosolutions.se',
+    year: 2025,
+  },
+  {
+    company: 'Automotive Excellence SpA',
+    country: 'Italien',
+    totalEmissions: 4350000,
+    scope1: 2000000,
+    scope2: 980000,
+    scope3: 1370000,
+    contact: 'emissioni@autoexcellence.it',
+    year: 2025,
+  },
+  {
+    company: 'Renewable Power Inc',
+    country: 'USA',
+    totalEmissions: 820000,
+    scope1: 270000,
+    scope2: 230000,
+    scope3: 320000,
+    contact: 'climate@renewpower.com',
+    year: 2025,
+  },
+  {
+    company: 'Transport Logistics GmbH',
+    country: 'Deutschland',
+    totalEmissions: 5900000,
+    scope1: 2650000,
+    scope2: 1280000,
+    scope3: 1970000,
+    contact: 'nachhaltigkeit@transport-log.de',
+    year: 2025,
+  },
+  {
+    company: 'ChemIndustrie SA',
+    country: 'Frankreich',
+    totalEmissions: 7300000,
+    scope1: 3250000,
+    scope2: 1750000,
+    scope3: 2300000,
+    contact: 'environnement@chemindustrie.fr',
+    year: 2025,
+  },
+  {
+    company: 'Pacific Steel Co',
+    country: 'Japan',
+    totalEmissions: 8650000,
+    scope1: 4000000,
+    scope2: 2200000,
+    scope3: 2450000,
+    contact: 'kankyou@pacificsteel.jp',
+    year: 2025,
+  },
+  {
+    company: 'Nordic Mining AS',
+    country: 'Norwegen',
+    totalEmissions: 3600000,
+    scope1: 1650000,
+    scope2: 870000,
+    scope3: 1080000,
+    contact: 'miljo@nordicmining.no',
+    year: 2025,
+  },
+  {
+    company: 'AgriFood Systems',
+    country: 'Niederlande',
+    totalEmissions: 1920000,
+    scope1: 760000,
+    scope2: 470000,
+    scope3: 690000,
+    contact: 'duurzaamheid@agrifood.nl',
+    year: 2025,
+  },
+  {
+    company: 'Construction Partners AG',
+    country: 'Schweiz',
+    totalEmissions: 1680000,
+    scope1: 640000,
+    scope2: 420000,
+    scope3: 620000,
+    contact: 'umwelt@construction-partners.ch',
+    year: 2025,
+  },
+  {
+    company: 'Electronics Manufacturing Ltd',
+    country: 'Südkorea',
+    totalEmissions: 2950000,
+    scope1: 1180000,
+    scope2: 820000,
+    scope3: 950000,
+    contact: 'environment@elecmanuf.kr',
+    year: 2025,
+  },
+];
+
+// Combined data for both years
+export const co2EmissionsData: CO2EmissionData[] = [
+  ...co2EmissionsData2024,
+  ...co2EmissionsData2025,
+];
+
+// Helper function to get data by year
+export function getDataByYear(year: number): CO2EmissionData[] {
+  return year === 2024 ? co2EmissionsData2024 : co2EmissionsData2025;
+}

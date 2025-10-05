@@ -1,5 +1,14 @@
 import React from 'react';
-import { Container, Title, Text, Paper, Stack, Button, Center } from '@mantine/core';
+import {
+  Container,
+  Title,
+  Text,
+  Paper,
+  Stack,
+  Button,
+  Center,
+  Image,
+} from '@mantine/core';
 import { IconUserPlus } from '@tabler/icons-react';
 import { StatsGroup } from './StatsGroup';
 import { useHistory } from 'react-router-dom';
@@ -13,23 +22,40 @@ export function About(): React.JSX.Element {
         <StatsGroup />
 
         <Paper shadow="xs" p="xl">
+          <Center mb="xl">
+            <Image
+              src="../images/logo.png"
+              alt="GreenRoots e.V. Logo"
+              h={350}
+              w="auto"
+              fit="contain"
+            />
+          </Center>
+
           <Title order={1} mb="lg">
             Über uns – GreenRoots e.V.
           </Title>
           <Text size="md" mb="md">
-            GreenRoots e.V. ist eine fiktive gemeinnützige Organisation, die sich für mehr Transparenz im Kampf gegen den Klimawandel einsetzt.
+            GreenRoots e.V. ist eine fiktive gemeinnützige Organisation, die
+            sich für mehr Transparenz im Kampf gegen den Klimawandel einsetzt.
           </Text>
           <Text size="md" mb="md">
-            Wir sammeln, analysieren und veröffentlichen Daten zu CO₂-Emissionen von Unternehmen und Ländern, um der Öffentlichkeit einen klaren Überblick zu geben.
+            Wir sammeln, analysieren und veröffentlichen Daten zu CO₂-Emissionen
+            von Unternehmen und Ländern, um der Öffentlichkeit einen klaren
+            Überblick zu geben.
           </Text>
           <Text size="md" mb="md">
-            Unsere Mission ist es, nachhaltige Entscheidungen zu fördern und den Wandel hin zu einer klimafreundlichen Zukunft zu beschleunigen.
+            Unsere Mission ist es, nachhaltige Entscheidungen zu fördern und den
+            Wandel hin zu einer klimafreundlichen Zukunft zu beschleunigen.
           </Text>
           <Text size="md" mb="md">
-            Neben unserer Datenplattform unterstützen wir Projekte für Aufforstung und die Renaturierung von Ökosystemen – denn jede Wurzel zählt.
+            Neben unserer Datenplattform unterstützen wir Projekte für
+            Aufforstung und die Renaturierung von Ökosystemen – denn jede Wurzel
+            zählt.
           </Text>
           <Text size="md" mb="xl">
-            Gemeinsam mit Partnern, Freiwilligen und Unterstützer*innen schaffen wir ein Netzwerk, das Hoffnung pflanzt und Wandel wachsen lässt. 🌱
+            Gemeinsam mit Partnern, Freiwilligen und Unterstützer*innen schaffen
+            wir ein Netzwerk, das Hoffnung pflanzt und Wandel wachsen lässt. 🌱
           </Text>
 
           <Center>
