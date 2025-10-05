@@ -12,7 +12,7 @@ export function Impressum(): React.JSX.Element {
             <Title order={2} size="h3" mb="xs">
               Angaben gemäß § 5 TMG
             </Title>
-            <Text size="md">
+            <Text size="md" dir="ltr">
               GreenRoots e.V.<br />
               Musterstraße 12<br />
               12XXX Berlin

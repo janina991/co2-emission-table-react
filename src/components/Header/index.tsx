@@ -42,7 +42,7 @@ export function Header(): React.JSX.Element {
             radius="sm"
           />
           <Title order={3} size="h4" className="header-title" visibleFrom="xs">
-            GreenRoots e.V.
+            <span dir="ltr">GreenRoots e.V.</span>
           </Title>
         </Link>
         <Group gap={5} className="nav-links">

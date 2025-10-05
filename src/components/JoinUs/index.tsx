@@ -24,14 +24,14 @@ export function JoinUs(): React.JSX.Element {
         <Stack gap="xl">
           <div>
             <Title order={1} mb="md">
-              Mach mit bei GreenRoots e.V.! 🌱
+              Mach mit bei <span dir="ltr">GreenRoots e.V.</span>! 🌱
             </Title>
             <Text size="md" mb="md">
               Du möchtest nicht nur zuschauen, sondern aktiv zum Klimaschutz
               beitragen? Dann werde Teil unseres ehrenamtlichen Netzwerks!
             </Text>
             <Text size="md" mb="md">
-              Bei GreenRoots e.V. kannst du deine Zeit, dein Wissen und deine
+              Bei <span dir="ltr">GreenRoots e.V.</span> kannst du deine Zeit, dein Wissen und deine
               Energie einsetzen, um echte Veränderungen anzustoßen:
             </Text>
           </div>
@@ -111,7 +111,7 @@ export function JoinUs(): React.JSX.Element {
               }}
             >
               <Stack gap="xs">
-                <Text size="md" fw={600}>
+                <Text size="md" fw={600} dir="ltr">
                   GreenRoots e.V.
                 </Text>
                 <Text size="sm">Musterstraße 12</Text>

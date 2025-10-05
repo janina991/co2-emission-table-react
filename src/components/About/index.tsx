@@ -26,18 +26,18 @@ export function About(): React.JSX.Element {
             <Image
               src="../images/logo.png"
               alt="GreenRoots e.V. Logo"
-              h={350}
+              h={120}
               w="auto"
               fit="contain"
             />
           </Center>
 
           <Title order={1} mb="lg">
-            Über uns – GreenRoots e.V.
+            Über uns – <span dir="ltr">GreenRoots e.V.</span>
           </Title>
           <Text size="md" mb="md">
-            GreenRoots e.V. ist eine fiktive gemeinnützige Organisation, die
-            sich für mehr Transparenz im Kampf gegen den Klimawandel einsetzt.
+            <span dir="ltr">GreenRoots e.V.</span> ist eine fiktive gemeinnützige Organisation, die
+             sich für mehr Transparenz im Kampf gegen den Klimawandel einsetzt.
           </Text>
           <Text size="md" mb="md">
             Wir sammeln, analysieren und veröffentlichen Daten zu CO₂-Emissionen
