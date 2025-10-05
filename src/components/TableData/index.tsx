@@ -39,7 +39,7 @@ function Th({ children, reversed, sorted, onSort }: ThProps) {
   return (
     <Table.Th className="th">
       <UnstyledButton onClick={onSort} className="control">
-        <Group justify="space-between">
+        <Group justify="space-between" wrap="nowrap">
           <Text fw={500} fz="sm">
             {children}
           </Text>
