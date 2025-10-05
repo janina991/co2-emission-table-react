@@ -124,11 +124,6 @@ export function TableData() {
   const [sortBy, setSortBy] = useState<keyof RowData | null>(null);
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
-  // Detect text direction (RTL for right-to-left languages like Arabic, Hebrew)
-  // The navbar position adapts automatically based on the document's text direction
-  const isRTL =
-    document.dir === 'rtl' || document.documentElement.dir === 'rtl';
-
   // Get data for the selected year
   const currentYearData = getDataByYear(parseInt(selectedYear));
 
@@ -203,19 +198,13 @@ export function TableData() {
   return (
     <Container my="md" size="xl">
       <Grid>
-        <Grid.Col
-          span={{ base: 12, md: 3 }}
-          order={{ base: 1, md: isRTL ? 2 : 1 }}
-        >
+        <Grid.Col span={{ base: 12, md: 3 }}>
           <YearNavbar
             activeYear={selectedYear}
             onYearSelect={handleYearSelect}
           />
         </Grid.Col>
-        <Grid.Col
-          span={{ base: 12, md: 9 }}
-          order={{ base: 2, md: isRTL ? 1 : 2 }}
-        >
+        <Grid.Col span={{ base: 12, md: 9 }}>
           <Grid mb="md" gutter="md">
             <Grid.Col span={{ base: 12, sm: 6, md: 8 }}>
               <TextInput
