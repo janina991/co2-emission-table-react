@@ -1,10 +1,12 @@
 .th {
   padding: 0 !important;
+  white-space: nowrap;
 }
 
 .control {
   width: 100%;
   padding: 8px 12px;
+  white-space: nowrap;
   
   &:hover {
     background-color: var(--mantine-color-gray-0);
@@ -15,4 +17,5 @@
   width: 21px;
   height: 21px;
   border-radius: 21px;
+  flex-shrink: 0;
 }

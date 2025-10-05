@@ -12,6 +12,7 @@ interface LinkItem {
 const links: LinkItem[] = [
   { link: '/about', label: 'Über' },
   { link: '/data', label: 'Daten' },
+  { link: '/join-us', label: 'Mitmachen' },
 ];
 
 export function Header(): React.JSX.Element {
@@ -41,7 +42,7 @@ export function Header(): React.JSX.Element {
             radius="sm"
           />
           <Title order={3} size="h4" className="header-title" visibleFrom="xs">
-            CO2 Emission Table
+            GreenRoots e.V.
           </Title>
         </Link>
         <Group gap={5} className="nav-links">

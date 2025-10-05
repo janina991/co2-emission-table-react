@@ -13,9 +13,18 @@ export function Impressum(): React.JSX.Element {
               Angaben gemäß § 5 TMG
             </Title>
             <Text size="md">
-              [Ihr Name/Firmenname]<br />
-              [Straße und Hausnummer]<br />
-              [PLZ und Ort]
+              GreenRoots e.V.<br />
+              Musterstraße 12<br />
+              12XXX Berlin
+            </Text>
+          </div>
+
+          <div>
+            <Title order={2} size="h3" mb="xs">
+              Vertreten durch
+            </Title>
+            <Text size="md">
+              Dr. Maria Mustermann (Vorstandsvorsitzende)
             </Text>
           </div>
 
@@ -24,8 +33,28 @@ export function Impressum(): React.JSX.Element {
               Kontakt
             </Title>
             <Text size="md">
-              Telefon: [Ihre Telefonnummer]<br />
-              E-Mail: [Ihre E-Mail-Adresse]
+              E-Mail: kontakt@greenroots-ev.XX<br />
+              Telefon: +49 (0)30 1234567
+            </Text>
+          </div>
+
+          <div>
+            <Title order={2} size="h3" mb="xs">
+              Registereintrag
+            </Title>
+            <Text size="md">
+              Eingetragen im Vereinsregister.<br />
+              Registergericht: Amtsgericht Berlin<br />
+              Registernummer: VR XXXXX
+            </Text>
+          </div>
+
+          <div>
+            <Title order={2} size="h3" mb="xs">
+              Umsatzsteuer-ID
+            </Title>
+            <Text size="md">
+              DE123456789 (fiktiv)
             </Text>
           </div>
 

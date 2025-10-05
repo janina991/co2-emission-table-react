@@ -10,20 +10,17 @@ import {
   Container,
   Grid,
   Group,
-  keys,
   ScrollArea,
+  Select,
   Table,
   Text,
   TextInput,
   UnstyledButton,
 } from '@mantine/core';
+import { co2EmissionsData, CO2EmissionData } from '../../data/co2EmissionsData';
 import './table.css';
 
-interface RowData {
-  name: string;
-  email: string;
-  company: string;
-}
+type RowData = CO2EmissionData;
 
 interface ThProps {
   children: React.ReactNode;
@@ -54,198 +51,240 @@ function Th({ children, reversed, sorted, onSort }: ThProps) {
   );
 }
 
-function filterData(data: RowData[], search: string) {
-  const query = search.toLowerCase().trim();
-  return data.filter((item) =>
-    keys(data[0]).some((key) => item[key].toLowerCase().includes(query)),
-  );
+function filterData(
+  data: RowData[],
+  companySearch: string,
+  countryFilter: string | null,
+) {
+  return data.filter((item) => {
+    // Filter by company name
+    const matchesCompany = companySearch
+      ? item.company.toLowerCase().includes(companySearch.toLowerCase().trim())
+      : true;
+
+    // Filter by country
+    const matchesCountry = countryFilter
+      ? item.country === countryFilter
+      : true;
+
+    return matchesCompany && matchesCountry;
+  });
 }
 
 function sortData(
   data: RowData[],
-  payload: { sortBy: keyof RowData | null; reversed: boolean; search: string },
+  payload: {
+    sortBy: keyof RowData | null;
+    reversed: boolean;
+    companySearch: string;
+    countryFilter: string | null;
+  },
 ) {
   const { sortBy } = payload;
 
   if (!sortBy) {
-    return filterData(data, payload.search);
+    return filterData(data, payload.companySearch, payload.countryFilter);
   }
 
   return filterData(
     [...data].sort((a, b) => {
-      if (payload.reversed) {
-        return b[sortBy].localeCompare(a[sortBy]);
+      const aValue = a[sortBy];
+      const bValue = b[sortBy];
+
+      // Handle numeric sorting
+      if (typeof aValue === 'number' && typeof bValue === 'number') {
+        return payload.reversed ? bValue - aValue : aValue - bValue;
       }
 
-      return a[sortBy].localeCompare(b[sortBy]);
+      // Handle string sorting
+      if (typeof aValue === 'string' && typeof bValue === 'string') {
+        if (payload.reversed) {
+          return bValue.localeCompare(aValue);
+        }
+        return aValue.localeCompare(bValue);
+      }
+
+      return 0;
     }),
-    payload.search,
+    payload.companySearch,
+    payload.countryFilter,
   );
 }
 
-const data = [
-  {
-    name: 'Athena Weissnat',
-    company: 'Little - Rippin',
-    email: 'Elouise.Prohaska@yahoo.com',
-  },
-  {
-    name: 'Deangelo Runolfsson',
-    company: 'Greenfelder - Krajcik',
-    email: 'Kadin_Trantow87@yahoo.com',
-  },
-  {
-    name: 'Danny Carter',
-    company: 'Kohler and Sons',
-    email: 'Marina3@hotmail.com',
-  },
-  {
-    name: 'Trace Tremblay PhD',
-    company: 'Crona, Aufderhar and Senger',
-    email: 'Antonina.Pouros@yahoo.com',
-  },
-  {
-    name: 'Derek Dibbert',
-    company: 'Gottlieb LLC',
-    email: 'Abagail29@hotmail.com',
-  },
-  {
-    name: 'Viola Bernhard',
-    company: 'Funk, Rohan and Kreiger',
-    email: 'Jamie23@hotmail.com',
-  },
-  {
-    name: 'Austin Jacobi',
-    company: 'Botsford - Corwin',
-    email: 'Genesis42@yahoo.com',
-  },
-  {
-    name: 'Hershel Mosciski',
-    company: 'Okuneva, Farrell and Kilback',
-    email: 'Idella.Stehr28@yahoo.com',
-  },
-  {
-    name: 'Mylene Ebert',
-    company: 'Kirlin and Sons',
-    email: 'Hildegard17@hotmail.com',
-  },
-  {
-    name: 'Lou Trantow',
-    company: 'Parisian - Lemke',
-    email: 'Hillard.Barrows1@hotmail.com',
-  },
-  {
-    name: 'Dariana Weimann',
-    company: 'Schowalter - Donnelly',
-    email: 'Colleen80@gmail.com',
-  },
-  {
-    name: 'Dr. Christy Herman',
-    company: 'VonRueden - Labadie',
-    email: 'Lilyan98@gmail.com',
-  },
-  {
-    name: 'Katelin Schuster',
-    company: 'Jacobson - Smitham',
-    email: 'Erich_Brekke76@gmail.com',
-  },
-  {
-    name: 'Melyna Macejkovic',
-    company: 'Schuster LLC',
-    email: 'Kylee4@yahoo.com',
-  },
-  {
-    name: 'Pinkie Rice',
-    company: 'Wolf, Trantow and Zulauf',
-    email: 'Fiona.Kutch@hotmail.com',
-  },
-  {
-    name: 'Brain Kreiger',
-    company: 'Lueilwitz Group',
-    email: 'Rico98@hotmail.com',
-  },
-];
+// Helper function to format numbers with thousand separators
+function formatNumber(num: number): string {
+  return num.toLocaleString('de-DE');
+}
 
 export function TableData() {
-  const [search, setSearch] = useState('');
-  const [sortedData, setSortedData] = useState(data);
+  const [companySearch, setCompanySearch] = useState('');
+  const [countryFilter, setCountryFilter] = useState<string | null>(null);
+  const [sortedData, setSortedData] = useState(co2EmissionsData);
   const [sortBy, setSortBy] = useState<keyof RowData | null>(null);
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
+
+  // Get unique countries for the select dropdown
+  const countries = Array.from(
+    new Set(co2EmissionsData.map((item) => item.country)),
+  ).sort();
 
   const setSorting = (field: keyof RowData) => {
     const reversed = field === sortBy ? !reverseSortDirection : false;
     setReverseSortDirection(reversed);
     setSortBy(field);
-    setSortedData(sortData(data, { sortBy: field, reversed, search }));
+    setSortedData(
+      sortData(co2EmissionsData, {
+        sortBy: field,
+        reversed,
+        companySearch,
+        countryFilter,
+      }),
+    );
   };
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCompanySearchChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const { value } = event.currentTarget;
-    setSearch(value);
+    setCompanySearch(value);
     setSortedData(
-      sortData(data, { sortBy, reversed: reverseSortDirection, search: value }),
+      sortData(co2EmissionsData, {
+        sortBy,
+        reversed: reverseSortDirection,
+        companySearch: value,
+        countryFilter,
+      }),
+    );
+  };
+
+  const handleCountryFilterChange = (value: string | null) => {
+    setCountryFilter(value);
+    setSortedData(
+      sortData(co2EmissionsData, {
+        sortBy,
+        reversed: reverseSortDirection,
+        companySearch,
+        countryFilter: value,
+      }),
     );
   };
 
   const rows = sortedData.map((row) => (
-    <Table.Tr key={row.name}>
-      <Table.Td>{row.name}</Table.Td>
-      <Table.Td>{row.email}</Table.Td>
+    <Table.Tr key={row.company + row.country}>
       <Table.Td>{row.company}</Table.Td>
+      <Table.Td>{row.country}</Table.Td>
+      <Table.Td style={{ textAlign: 'right' }}>
+        {formatNumber(row.totalEmissions)}
+      </Table.Td>
+      <Table.Td style={{ textAlign: 'right' }}>
+        {formatNumber(row.scope1)}
+      </Table.Td>
+      <Table.Td style={{ textAlign: 'right' }}>
+        {formatNumber(row.scope2)}
+      </Table.Td>
+      <Table.Td style={{ textAlign: 'right' }}>
+        {formatNumber(row.scope3)}
+      </Table.Td>
+      <Table.Td>{row.contact}</Table.Td>
     </Table.Tr>
   ));
 
   return (
-    <Container my="md">
+    <Container my="md" size="xl">
       <Grid>
         <Grid.Col span={{ base: 12, xs: 12 }}>
+          <Grid mb="md" gutter="md">
+            <Grid.Col span={{ base: 12, sm: 6, md: 8 }}>
+              <TextInput
+                placeholder="Firma suchen..."
+                leftSection={<IconSearch size={16} stroke={1.5} />}
+                value={companySearch}
+                onChange={handleCompanySearchChange}
+                label="Unternehmen"
+              />
+            </Grid.Col>
+            <Grid.Col span={{ base: 12, sm: 6, md: 4 }}>
+              <Select
+                placeholder="Alle Länder"
+                data={countries}
+                value={countryFilter}
+                onChange={handleCountryFilterChange}
+                clearable
+                searchable
+                label="Land"
+              />
+            </Grid.Col>
+          </Grid>
           <ScrollArea>
-            <TextInput
-              placeholder="Search by any field"
-              mb="md"
-              leftSection={<IconSearch size={16} stroke={1.5} />}
-              value={search}
-              onChange={handleSearchChange}
-            />
             <Table
               horizontalSpacing="md"
               verticalSpacing="xs"
-              miw={700}
-              layout="fixed"
+              miw={1200}
+              layout="auto"
+              striped
+              highlightOnHover
             >
-              <Table.Tbody>
+              <Table.Thead>
                 <Table.Tr>
-                  <Th
-                    sorted={sortBy === 'name'}
-                    reversed={reverseSortDirection}
-                    onSort={() => setSorting('name')}
-                  >
-                    Name
-                  </Th>
-                  <Th
-                    sorted={sortBy === 'email'}
-                    reversed={reverseSortDirection}
-                    onSort={() => setSorting('email')}
-                  >
-                    Email
-                  </Th>
                   <Th
                     sorted={sortBy === 'company'}
                     reversed={reverseSortDirection}
                     onSort={() => setSorting('company')}
                   >
-                    Company
+                    Unternehmen
+                  </Th>
+                  <Th
+                    sorted={sortBy === 'country'}
+                    reversed={reverseSortDirection}
+                    onSort={() => setSorting('country')}
+                  >
+                    Land
+                  </Th>
+                  <Th
+                    sorted={sortBy === 'totalEmissions'}
+                    reversed={reverseSortDirection}
+                    onSort={() => setSorting('totalEmissions')}
+                  >
+                    Gesamt-Emissionen (t CO₂e)
+                  </Th>
+                  <Th
+                    sorted={sortBy === 'scope1'}
+                    reversed={reverseSortDirection}
+                    onSort={() => setSorting('scope1')}
+                  >
+                    Scope 1 (direkt)
+                  </Th>
+                  <Th
+                    sorted={sortBy === 'scope2'}
+                    reversed={reverseSortDirection}
+                    onSort={() => setSorting('scope2')}
+                  >
+                    Scope 2 (Energie)
+                  </Th>
+                  <Th
+                    sorted={sortBy === 'scope3'}
+                    reversed={reverseSortDirection}
+                    onSort={() => setSorting('scope3')}
+                  >
+                    Scope 3 (Lieferkette)
+                  </Th>
+                  <Th
+                    sorted={sortBy === 'contact'}
+                    reversed={reverseSortDirection}
+                    onSort={() => setSorting('contact')}
+                  >
+                    Kontakt
                   </Th>
                 </Table.Tr>
-              </Table.Tbody>
+              </Table.Thead>
               <Table.Tbody>
                 {rows.length > 0 ? (
                   rows
                 ) : (
                   <Table.Tr>
-                    <Table.Td colSpan={Object.keys(data[0]).length}>
+                    <Table.Td colSpan={7}>
                       <Text fw={500} ta="center">
-                        Nothing found
+                        Keine Ergebnisse gefunden
                       </Text>
                     </Table.Td>
                   </Table.Tr>

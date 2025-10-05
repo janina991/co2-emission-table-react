@@ -10,6 +10,7 @@ import { Footer } from '../Footer';
 import { About } from '../About';
 import { TableData } from '../TableData';
 import { Impressum } from '../Impressum';
+import { JoinUs } from '../JoinUs';
 
 const App: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ const App: React.FC = () => {
       <Switch>
         <Route exact path="/about" component={About} />
         <Route exact path="/data" component={TableData} />
+        <Route exact path="/join-us" component={JoinUs} />
         <Route exact path="/impressum" component={Impressum} />
         <Redirect from="/" to="/data" />
       </Switch>
