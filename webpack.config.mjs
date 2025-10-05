@@ -36,7 +36,7 @@ export default () => {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.mjs'],
       fullySpecified: false,
     },
-    entry: ['babel-polyfill', 'whatwg-fetch', './src/index.js'],
+    entry: ['babel-polyfill', 'whatwg-fetch', './src/index.tsx'],
     output: {
       path: path.resolve(__dirname, './dist'),
       filename: '[name].[contenthash].js',
@@ -65,11 +65,11 @@ export default () => {
               const match = module.context.match(
                 /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
               );
-              
+
               if (!match) {
                 return 'vendor';
               }
-              
+
               const packageName = match[1];
 
               // npm package names are URL-safe, but some servers don't like @ symbols
@@ -86,7 +86,7 @@ export default () => {
           use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
         },
         {
-          test: /\.[jt]s$/,
+          test: /\.(js|jsx|ts|tsx)$/,
           include: [
             path.resolve(path.join(__dirname, 'node_modules')),
             path.resolve(path.join(__dirname, 'src')),

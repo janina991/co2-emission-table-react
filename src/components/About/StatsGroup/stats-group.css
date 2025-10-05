@@ -1,0 +1,51 @@
+.stat-group {
+  display: flex;
+  background: linear-gradient(135deg, #f0fdf4 0%, #fef9f3 100%);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  gap: 1rem;
+  border: 1px solid #dcfce7;
+}
+
+.stat {
+  flex: 1;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.08);
+  border: 1px solid #f0fdf4;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.15);
+}
+
+.stat .count {
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #15803d;
+}
+
+.stat .title {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: #868e96;
+  margin-bottom: 0.5rem;
+}
+
+.stat .description {
+  font-size: 0.875rem;
+  color: #868e96;
+  line-height: 1.5;
+}
+
+@media (max-width: 48em) {
+  .stat-group {
+    flex-direction: column;
+  }
+}

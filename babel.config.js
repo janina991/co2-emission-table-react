@@ -8,6 +8,7 @@ module.exports = {
       },
     ],
     '@babel/react',
+    '@babel/preset-typescript',
   ],
   plugins: [
     '@babel/proposal-class-properties',
@@ -15,7 +16,7 @@ module.exports = {
   ],
   env: {
     test: {
-      presets: [['@babel/env'], '@babel/react'],
+      presets: [['@babel/env'], '@babel/react', '@babel/preset-typescript'],
       plugins: [
         '@babel/proposal-class-properties',
         '@babel/proposal-object-rest-spread',
